@@ -4,3 +4,11 @@ services:
     build: .
     devices:
       - "/dev/ttyUSB1:/dev/ttyUSB1"
+    environment:
+      - MQTT_HOST=localhost
+      - MQTT_PORT=1883
+      - TOPIC_PREFIX=satel/alarm
+      - DEVICE=/dev/ttyS0
+      - DEBUG=False
+      - MQTT_USER=user
+      - MQTT_PASSWORD=password
