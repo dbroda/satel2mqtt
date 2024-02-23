@@ -12,3 +12,4 @@ services:
       - DEBUG=False
       - MQTT_USER=user
       - MQTT_PASSWORD=password
+    restart: always
