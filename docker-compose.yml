@@ -5,11 +5,11 @@ services:
     devices:
       - "/dev/ttyUSB1:/dev/ttyUSB1"
     environment:
-      - MQTT_HOST=localhost
-      - MQTT_PORT=1883
-      - TOPIC_PREFIX=satel/alarm
-      - DEVICE=/dev/ttyS0
-      - DEBUG=False
-      - MQTT_USER=user
-      - MQTT_PASSWORD=password
+      - MQTT_HOST=$MQTT_HOST
+      - MQTT_PORT=$MQTT_PORT
+      - TOPIC_PREFIX=$TOPIC_PREFIX
+      - DEVICE=$DEVICE
+      - DEBUG=$DEBUG
+      - MQTT_USER=$MQTT_USER
+      - MQTT_PASSWORD=$MQTT_PASSWORD
     restart: always
