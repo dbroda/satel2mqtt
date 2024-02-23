@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  satel:
+    build: .
+    devices:
+      - "/dev/ttyUSB1:/dev/ttyUSB1"
+    volumes:
+      - .:/app
