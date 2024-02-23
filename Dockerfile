@@ -10,4 +10,4 @@ RUN apt install -y python3-paho-mqtt python3-serial
 COPY satel.py /app
 
 
-CMD ["python3", "./satel.py"]
+CMD ["python3", "-u", "./satel.py"]

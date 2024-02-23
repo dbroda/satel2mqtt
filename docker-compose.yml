@@ -4,5 +4,3 @@ services:
     build: .
     devices:
       - "/dev/ttyUSB1:/dev/ttyUSB1"
-    volumes:
-      - .:/app
