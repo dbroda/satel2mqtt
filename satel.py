@@ -33,9 +33,9 @@ def action(line):
     elif "KONIEC NARUSZENIA CZUJNIKA" in line:
         return "OFF"
     elif "!!!     ALARM Z CZUJNIKA      !!!" in line:
-        return "ALARM"
+        return "ON"
     else:
-        return "OTHER"
+        return "OFF"
 
 def parse_line(line):
     pattern = r"\s-\s(.*)WE\.(\d\d)$"
@@ -43,11 +43,14 @@ def parse_line(line):
     if match:
         event, sensor = match.groups()
         input = int(sensor)
-        msg = MSG_TEMPLATE.format(sensor_name(input), action(event), action(event))
+        state = action(event)
+        msg = MSG_TEMPLATE.format(sensor_name(input), state)
         mqtt_topic = f"{topic_prefix}/{sensor_name(input)}"
+        mqtt_state_topic = f"{topic_prefix}/{sensor_name(input)}/state"
         if DEBUG:
             print(f"publishing MQTT host: {mqtt_host}, topic: {mqtt_topic}, msg: {msg}")
         client.publish(mqtt_topic, msg)
+        client.publish(mqtt_state_topic, state)
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
