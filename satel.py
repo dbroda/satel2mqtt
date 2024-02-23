@@ -60,6 +60,8 @@ client.on_connect = on_connect
 
 if mqtt_user and mqtt_password:
     client.username_pw_set(mqtt_user, mqtt_password)
+    
+print(f"Connecting to {mqtt_host}:{mqtt_port} with user: {mqtt_user}")
 
 client.connect(mqtt_host, mqtt_port, 60)
 
