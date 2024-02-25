@@ -3,7 +3,7 @@ services:
   satel:
     build: .
     devices:
-      - "/dev/ttyUSB1:/dev/ttyUSB1"
+      - "/dev/serial/by-id/usb-1a86_USB2.0-Ser_-if00-port0"
     environment:
       - MQTT_HOST=$MQTT_HOST
       - MQTT_PORT=$MQTT_PORT

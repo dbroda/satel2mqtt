@@ -44,12 +44,10 @@ def parse_line(line):
         event, sensor = match.groups()
         input = int(sensor)
         state = action(event)
-        msg = MSG_TEMPLATE.format(sensor_name(input), state)
-        mqtt_topic = f"{topic_prefix}/{sensor_name(input)}"
         mqtt_state_topic = f"{topic_prefix}/{sensor_name(input)}/state"
         if DEBUG:
-            print(f"publishing MQTT host: {mqtt_host}, topic: {mqtt_topic}, msg: {msg}")
-        client.publish(mqtt_topic, msg)
+            print(f"publishing MQTT host: {mqtt_host}, topic: {mqtt_state_topic}, msg: {state}")
+        # client.publish(mqtt_topic, msg)
         client.publish(mqtt_state_topic, state)
 
 def on_connect(client, userdata, flags, rc):
@@ -59,6 +57,7 @@ client = mqtt.Client()
 client.on_connect = on_connect
 
 if mqtt_user and mqtt_password:
+    if DEBUG: print(f"Setting username and password for MQTT: {mqtt_user}")
     client.username_pw_set(mqtt_user, mqtt_password)
     
 print(f"Connecting to {mqtt_host}:{mqtt_port} with user: {mqtt_user}")
@@ -77,6 +76,7 @@ try:
             if line:
                 if DEBUG: print(f"Satel: {line}")
                 parse_line(line)
+            sleep(0.1)
 except serial.SerialException as e:
     print(f"Serial error: {e}")
 except Exception as e:
